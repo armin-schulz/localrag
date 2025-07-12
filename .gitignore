@@ -1,0 +1,33 @@
+ --- Node.js / frontend ---
+frontend/node_modules/
+frontend/.next/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+frontend/dist/
+frontend/out/
+
+# --- Java / backend ---
+backend/target/
+backend/.idea/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/*.iml
+backend/*.log
+backend/.env
+
+# --- LLM / llm ---
+llm/.ollama/             # Falls Ollama lokale Cache/Config dort speichert
+llm/models/              # Falls du Modelle lokal gespeichert hast und nicht ins Repo willst
+
+# --- Allgemein ---
+.DS_Store
+*.log
+*.swp
+*.tmp
+.vscode/
+.idea/
+*.iml
+.env
