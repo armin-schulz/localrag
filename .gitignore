@@ -19,8 +19,8 @@ backend/*.log
 backend/.env
 
 # --- LLM / llm ---
-llm/.ollama/             # Falls Ollama lokale Cache/Config dort speichert
-llm/models/              # Falls du Modelle lokal gespeichert hast und nicht ins Repo willst
+llm/.ollama/
+llm/models/
 
 # --- Allgemein ---
 .DS_Store
