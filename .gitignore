@@ -31,3 +31,6 @@ llm/models/              # Falls du Modelle lokal gespeichert hast und nicht ins
 .idea/
 *.iml
 .env
+
+# --- Custom ---
+planning
