@@ -2,7 +2,6 @@ spring:
     application:
         name: backend
 
-
 # postgres
     datasource:
         url: ${DB_URL}
@@ -16,3 +15,12 @@ spring:
             ddl-auto: update
         show-sql: true
         database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+    port: ${BACKEND_PORT}
+
+app:
+    jwt:
+        secret: ${JWT_SECRET}
+        access-token-expiration: ${JWT_ACCESS_EXPIRATION}
+        refresh-token-expiration: ${JWT_REFRESH_EXPIRATION}
