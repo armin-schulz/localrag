@@ -1,11 +1,5 @@
 package de.localrag.backend.service.auth;
 
-import de.localrag.backend.api.DTOConverter;
-import de.localrag.backend.api.auth.LoginRequest;
-import de.localrag.backend.api.auth.LoginResponse;
-import de.localrag.backend.api.auth.RegisterRequest;
-import de.localrag.backend.api.auth.RegisterResponse;
-import de.localrag.backend.api.user.UserDTO;
 import de.localrag.backend.model.auth.LoginResult;
 import de.localrag.backend.model.auth.RegisterResult;
 import de.localrag.backend.model.user.User;
