@@ -16,6 +16,7 @@ public class UserDTOConverter implements DTOConverter<User, UserDTO> {
                 .displayName(entity.getDisplayName())
                 .email(entity.getEmail())
                 .role(entity.getRole())
+                .active(entity.isActive())
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
@@ -30,6 +31,7 @@ public class UserDTOConverter implements DTOConverter<User, UserDTO> {
                 .displayName(userDTO.getDisplayName())
                 .email(userDTO.getEmail())
                 .role(userDTO.getRole())
+                .active(userDTO.isActive())
                 .createdAt(userDTO.getCreatedAt())
                 .build();
     }
