@@ -2,8 +2,10 @@ package de.localrag.backend.api.auth;
 
 import de.localrag.backend.model.auth.RegisterResult;
 import de.localrag.backend.service.auth.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final LoginDTOConverter loginDTOConverter;
     private final RegisterDTOConverter registerDTOConverter;
+    private final RefreshDTOConverter refreshDTOConverter;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
@@ -29,5 +32,11 @@ public class AuthenticationController {
         RegisterResult registerResult = authenticationService.register(
                 request.getEmail(), request.getPassword(), request.getDisplayName());
         return ResponseEntity.status(HttpStatus.CREATED).body(registerDTOConverter.toDTO(registerResult));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<RefreshResponse> refresh(HttpServletRequest request) {
+        return ResponseEntity.ok(refreshDTOConverter.toDTO(
+                authenticationService.refresh(request.getHeader(HttpHeaders.AUTHORIZATION))));
     }
 }

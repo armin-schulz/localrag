@@ -1,14 +1,17 @@
 package de.localrag.backend.service.auth;
 
 import de.localrag.backend.model.auth.LoginResult;
+import de.localrag.backend.model.auth.RefreshResult;
 import de.localrag.backend.model.auth.RegisterResult;
 import de.localrag.backend.model.user.User;
 import de.localrag.backend.model.user.UserRole;
 import de.localrag.backend.respository.user.UserRepository;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,8 +32,8 @@ public class AuthenticationService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return LoginResult.builder()
-                .accessToken(jwtService.generateToken(user))
-                .refreshToken("<no refresh>")
+                .accessToken(jwtService.generateAccessToken(user))
+                .refreshToken(jwtService.generateRefreshToken(user))
                 .build();
     }
 
@@ -49,9 +52,28 @@ public class AuthenticationService {
         return RegisterResult.builder()
                 .user(newUser)
                 .loginResult(LoginResult.builder()
-                        .accessToken(jwtService.generateToken(newUser))
-                        .refreshToken("no refresh")
+                        .accessToken(jwtService.generateAccessToken(newUser))
+                        .refreshToken(jwtService.generateRefreshToken(newUser))
                         .build())
+                .build();
+    }
+
+    public RefreshResult refresh(String authorizationHeader) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            throw new AuthenticationCredentialsNotFoundException("Missing refresh token");
+        }
+        final String refreshToken = authorizationHeader.replace("Bearer ", "");
+        final String userEmail = jwtService.extractUsername(refreshToken);
+        UserDetails userDetails = userRepository.findByEmail(userEmail).orElse(null);
+        if (userDetails == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        // <revoke token here, if wanted>
+        if (!jwtService.isTokenValid(refreshToken, userDetails)) {
+            throw new AuthenticationCredentialsNotFoundException("Invalid refresh token");
+        }
+        return RefreshResult.builder()
+                .accessToken(jwtService.generateAccessToken(userDetails))
                 .build();
     }
 }
