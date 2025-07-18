@@ -1,6 +1,5 @@
 package de.localrag.backend.api.auth;
 
-import de.localrag.backend.api.user.UserDTOConverter;
 import de.localrag.backend.model.auth.RegisterResult;
 import de.localrag.backend.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
-    private final UserDTOConverter userDTOConverter;
     private final LoginDTOConverter loginDTOConverter;
     private final RegisterDTOConverter registerDTOConverter;
 
