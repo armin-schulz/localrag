@@ -20,19 +20,4 @@ public class UserDTOConverter implements DTOConverter<User, UserDTO> {
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
-
-    @Override
-    public User toEntity(UserDTO userDTO) {
-        if (userDTO == null) {
-            return null;
-        }
-        return User.builder()
-                .id(userDTO.getId())
-                .displayName(userDTO.getDisplayName())
-                .email(userDTO.getEmail())
-                .role(userDTO.getRole())
-                .active(userDTO.isActive())
-                .createdAt(userDTO.getCreatedAt())
-                .build();
-    }
 }
