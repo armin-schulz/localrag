@@ -1,7 +1,7 @@
 package de.localrag.backend.service.user;
 
 import de.localrag.backend.model.user.User;
-import de.localrag.backend.respository.user.UserRepository;
+import de.localrag.backend.repository.user.UserRepository;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;

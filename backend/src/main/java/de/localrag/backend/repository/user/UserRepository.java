@@ -1,4 +1,4 @@
-package de.localrag.backend.respository.user;
+package de.localrag.backend.repository.user;
 
 import de.localrag.backend.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

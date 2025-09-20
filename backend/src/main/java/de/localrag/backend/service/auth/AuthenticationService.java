@@ -5,7 +5,7 @@ import de.localrag.backend.model.auth.RefreshResult;
 import de.localrag.backend.model.auth.RegisterResult;
 import de.localrag.backend.model.user.User;
 import de.localrag.backend.model.user.UserRole;
-import de.localrag.backend.respository.user.UserRepository;
+import de.localrag.backend.repository.user.UserRepository;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;

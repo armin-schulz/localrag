@@ -1,6 +1,6 @@
 package de.localrag.backend.config;
 
-import de.localrag.backend.respository.user.UserRepository;
+import de.localrag.backend.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
